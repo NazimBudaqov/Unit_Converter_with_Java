@@ -29,11 +29,12 @@ public class FreeExchangeRates {
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
         try (InputStreamReader reader = new InputStreamReader(connection.getInputStream())) {
-            JsonObject jsonResponse = JsonParser.parseReader(reader).getAsJsonObject();
+            JsonObject jsonResponse = JsonParser.parseReader(reader).getAsJsonObject(); //?????
 //            System.out.println("string:" + jsonResponse);
 
             // Extract the exchange rate for the target currency
-            return jsonResponse.getAsJsonObject("conversion_rates").get(targetCurrency).getAsDouble();
+            return jsonResponse.getAsJsonObject("conversion_rates").get(targetCurrency).getAsDouble(); //?????
         }
+
     }
 }

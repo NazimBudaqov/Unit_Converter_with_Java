@@ -55,34 +55,16 @@ public class H_Unit_Converter {
         f.add(tabbedPane);
 
         inputField = new JTextField();
-        inputField.setBounds(50, 50, 200, 30);
+        inputField.setBounds(50, 50, 140, 30);
         conversionPanel.add(inputField);
 
         resultField = new JTextField();
-        resultField.setBounds(50,200,200,30);
+        resultField.setBounds(50,200,140,30);
         conversionPanel.add(resultField);
 
-
-        // buttons to add temperature definitions to text (one time)
-        JButton b_celsius = new JButton("°C");
-        b_celsius.setBounds(50, 100, 60, 20);
-        conversionPanel.add(b_celsius);
-        JButton b_fahrenheit = new JButton("°F");
-        b_fahrenheit.setBounds(120, 100, 60, 20);
-        conversionPanel.add(b_fahrenheit);
-        JButton b_kelvin = new JButton("°K");
-        b_kelvin.setBounds(190, 100, 60, 20);
-        conversionPanel.add(b_kelvin);
-
-        JButton b_getText = new JButton("Convert");
-        b_getText.setBounds(270, 50, 100, 30);
-        conversionPanel.add(b_getText);
-
-//        JButton b_currency = new JButton("Currency");
-//        b_currency.setBounds(50, 130, 100, 30);
-//        conversionPanel.add(b_currency);
-
         // button "Convert" - get text from input field,
+        JButton b_getText = new JButton("Convert");
+        b_getText.setBounds(70, 125, 100, 30);
         b_getText.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
                 String getValue = inputField.getText();
@@ -92,6 +74,7 @@ public class H_Unit_Converter {
                 System.out.println(source_value + source_type);
             }
         });
+        conversionPanel.add(b_getText);
 
         // Create menu1 and set it to the default selection "Temperature"
         JComboBox<String> menu1 = new JComboBox<>(Methods.units);
@@ -101,9 +84,12 @@ public class H_Unit_Converter {
 
         // Create menu2 and set it to the default items for Temperature
         JComboBox<String> menu2 = new JComboBox<>(Methods.temperatureList);
-        menu2.setBounds(190, 5, 60, 30);
+        menu2.setBounds(190, 50, 100, 29);
         conversionPanel.add(menu2);
 
+        JComboBox<String> menu3 = new JComboBox<>(Methods.temperatureList);
+        menu3.setBounds(190, 200, 100, 29);
+        conversionPanel.add(menu3);
         menu1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -111,78 +97,47 @@ public class H_Unit_Converter {
 
                 // Clear the items in menu2
                 menu2.removeAllItems();
+                menu3.removeAllItems();
 
                 // Depending on the selected item in menu1, populate menu2 with appropriate items
                 if ("Temperature".equals(selectedItem)) {
                     for (String item : Methods.temperatureList) {
                         menu2.addItem(item);
+                        menu3.addItem(item);
                     }
                 } else if ("Volume".equals(selectedItem)) {
                     for (String item : Methods.volumeList) {
                         menu2.addItem(item);
+                        menu3.addItem(item);
                     }
                 } else if ("Mass".equals(selectedItem)) {
                     for (String item : Methods.massList) {
                         menu2.addItem(item);
+                        menu3.addItem(item);
                     }
                 } else if ("Currency".equals(selectedItem)) {
                     for (String item : Methods.currencyList) {
                         menu2.addItem(item);
+                        menu3.addItem(item);
                     }
                 }
 
                 // Clear and update the resultField with the selected item in menu2
-                resultField.setText("");
-                resultField.setText((String) menu2.getSelectedItem());
+                resultField.setText("result");
+//                resultField.setText((String) menu2.getSelectedItem());
 
             }
         });
 
-// Create resultField and set it to the default selected item in menu2
-        resultField = new JTextField();
+
         resultField.setText((String) menu2.getSelectedItem());
-        resultField.setBounds(50, 200, 200, 30);
-        conversionPanel.add(resultField);
 
         // Repaint the panel to update menu2 and resultField
         conversionPanel.revalidate();
         conversionPanel.repaint();
 
 
-        // Consume the newline character left in the buffer
-//        sc.nextLine();
-
-//        System.out.print("Type to convert (temp, currency, volume, mass, etc.): ");
-//        String type_b;
-//
-//        switch (type_b) {
-//            case "temp":
-//                double convertedTemp = tempUnitConverter(unit_a, type_a);
-//                System.out.println("Converted Temperature: " + convertedTemp);
-//                break;
-//
-//            case "currency":
-//                // Handle currency conversion
-//                break;
-//
-//            case "volume":
-//                // Handle volume conversion
-//                break;
-//
-//            case "mass":
-//                // Handle mass conversion
-//                break;
-//
-//            default:
-//                System.out.println("Invalid unit type.");
-//                break;
-//        }
-
-//        sc.close();
 //        System.exit(0);
-
         f.pack();
     }
-
-
 }
