@@ -21,14 +21,19 @@ public class Methods {
 
     public static final String[] currencyList = {"USD - US Dollar", "EUR - Euro", "JPY - Japanese Yen"};
 
-    public static String extractNumericValue(String input) {
+    public static double extractNumericValue(String input) {
         Pattern pattern = Pattern.compile("\\d+(\\.\\d+)?");
         Matcher matcher = pattern.matcher(input);
         if (matcher.find()) {
-            return matcher.group();
+            double result = Double.parseDouble(matcher.group());
+            return result;
         } else {
-            return "";
+            return 0;
         }
+//        if (matcher.find()) {
+//            return matcher.group();
+//        }
+
     }
 
     // Extract non-numeric text using regex
@@ -47,7 +52,7 @@ public class Methods {
 
     public static Double convertTemperatures(String input, String output_type){
 
-        double input_value = Double.parseDouble(extractNumericValue(input));
+        double input_value = extractNumericValue(input);
         char input_type = input.charAt(input.length()-1);
         double result = 0;
 
@@ -85,10 +90,20 @@ public class Methods {
         return result;
     }
 
-    public static double convertCurrencies(String input, String output_currency){
-        double input_value = Double.parseDouble(extractNumericValue(input));
-        char input_type = input.charAt(input.length()-1);
+    public static double convertCurrencies(String input, String target_currency){
+
+        double input_value = extractNumericValue(input);
+        String source_type = input.substring(input.length()-3,input.length());
         double result = 0;
+
+        try {
+            //conversion logic
+            double rate = FreeExchangeRates.getExchangeRate(source_type,target_currency);
+            result = input_value * rate; //value result
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
         return result;
     }
 
@@ -96,8 +111,9 @@ public class Methods {
     public static void main(String[] args) {
 
         System.out.println(convertTemperatures("5 F", "K"));
-        System.out.println();
+        System.out.println(convertCurrencies("5 USD","AZN"));
     }
 
 }
+
 

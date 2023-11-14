@@ -78,25 +78,18 @@ public class H_Unit_Converter {
         b_getText.setBounds(270, 50, 100, 30);
         conversionPanel.add(b_getText);
 
-        JButton b_currency = new JButton("Currency");
-        b_currency.setBounds(50, 130, 100, 30);
-        conversionPanel.add(b_currency);
+//        JButton b_currency = new JButton("Currency");
+//        b_currency.setBounds(50, 130, 100, 30);
+//        conversionPanel.add(b_currency);
 
         // button "Convert" - get text from input field,
         b_getText.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
                 String getValue = inputField.getText();
-                System.out.println("text: " + getValue);
+                double source_value = extractNumericValue(getValue);
+                String source_type = extractNonNumericText(getValue);
 
-                String dubleStr = extractNumericValue(getValue);
-                try {
-                    double unit_a = Double.parseDouble(dubleStr);
-                    System.out.println("Double value: " + dubleStr);
-                } catch (NumberFormatException e) {
-                    System.err.println("Invalid double format: " + dubleStr);
-                }
-
-                String type_a = extractNonNumericText(getValue);
+                System.out.println(source_value + source_type);
             }
         });
 
@@ -106,7 +99,7 @@ public class H_Unit_Converter {
         menu1.setBounds(50, 5, 120, 30);
         conversionPanel.add(menu1);
 
-// Create menu2 and set it to the default items for Temperature
+        // Create menu2 and set it to the default items for Temperature
         JComboBox<String> menu2 = new JComboBox<>(Methods.temperatureList);
         menu2.setBounds(190, 5, 60, 30);
         conversionPanel.add(menu2);
