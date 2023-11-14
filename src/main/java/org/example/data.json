@@ -1,0 +1,8 @@
+{
+  "units": ["Temperature", "Volume", "Mass", "Currency"],
+  "temperatureList": ["Celsius", "Fahrenheit", "Kelvin"],
+  "volumeList": ["Cubic Meter", "Liter", "Gallon", "Quart", "Pint"],
+  "massList": ["Kilogram", "Gram", "Pound", "Ounce", "Milligram"],
+  "currencyList": ["USD - US Dollar", "EUR - Euro", "JPY - Japanese Yen"]
+
+}
